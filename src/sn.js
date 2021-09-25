@@ -9,15 +9,16 @@ import {
   
     //   将vnode --> 真实dom，返回
     const createElement = (vnode) => {
-        const vdom = document.createElement(vnode.sel)
+        const domNode = document.createElement(vnode.sel)
         if (vnode.text !== ''  && (vnode.children === undefined || vnode.children.length === 0)) {
-            vdom.innerText = vnode.text
+            domNode.innerText = vnode.text
         } else if (Array.isArray(vnode.children) && vnode.children.length > 0){
             for (const item of vnode.children) {
-                vdom.appendChild(createElement(item))
+                domNode.appendChild(createElement(item))
             }
         }
-        return vdom
+        vnode.elm = domNode
+        return domNode
     }
 
 
@@ -28,7 +29,7 @@ import {
         children: children,
         text: text,
         elm: elm,
-        key: key
+        key: data.key
       }
   }
 //   只识别三种情况：
@@ -55,6 +56,38 @@ import {
       }
   }
 
+  const patchVnode = (oldNode, newNode) => {
+        if (oldNode === newNode) return
+        // 新节点存在text属性，即：没有children。
+        if (newNode.text !== '' && (newNode.children === undefined || newNode.children.length === 0)) {
+            if (oldNode.text !== newNode.text) {
+                console.log('jinlaile')
+                oldNode.elm.innerText = newNode.text
+                newNode.elm = oldNode.elm
+            }
+        } else {
+            // 新节点没有text，有children
+            // 判断老得有没有children
+            if (Array.isArray(oldNode.children) && oldNode.children.length > 0) {
+              // 有,diff的精华
+              // for (let i =0; i < )
 
 
-  export {myH, myVnode, createElement }
+              
+            } else {
+                // o没有
+                console.log('老东西没有儿子')
+                oldNode.elm.innerText = ''
+                for (const item of newNode.children) {
+                  oldNode.elm.appendChild(createElement(item))                  
+                }
+                // for (const item of newNode.children) {
+                //     oldNode.elm.appendChild(createElement(item))
+                // }
+            }
+        }      
+  }
+
+
+
+  export {myH, myVnode, createElement, patchVnode }
