@@ -19,8 +19,8 @@ import {
         vnode.elm = domNode
         return domNode
     }
-
-
+ 
+ 
   const myVnode = (sel, data, children, text, elm, key) => {
       return {
         sel: sel,
@@ -43,23 +43,23 @@ import {
           for (const item of c) {
               if (!(typeof item === 'object' && item.hasOwnProperty('sel'))) {
                   throw new Error('数组中包含不是h的像')
-              } 
+              }
               children.push(item)
           }
           return myVnode(sel, data, children, undefined, undefined, undefined)
-
+ 
       } else if (typeof c === 'object' && c.hasOwnProperty('sel')) {
           return myVnode(sel, data, [c], undefined, undefined, undefined)
       } else {
           throw new Error('输入不符合要求')
       }
   }
-
+ 
   const checkSameNode = (oldNode, newNode) => {
       return oldNode.sel === newNode.sel && oldNode.key === newNode.key
   }
-
-  const updateChildren = (oldElm, oldCh, newCh) => {
+ 
+  const updateChildren = (parentElm, oldCh, newCh) => {
       let oldStartIdx = 0
       let oldEndIdx = oldCh.length - 1
       let newStartIdx = 0
@@ -68,25 +68,50 @@ import {
       let oldEndVnode = oldCh[oldEndIdx]
       let newStartVnode = newCh[0]
       let newEndVnode = newCh[newEndIdx]
-
-
+ 
       while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
           if (checkSameNode(oldStartVnode, newStartVnode)) {
+              console.log('命中新前与旧前')
               patchVnode(oldStartVnode, newStartVnode)
               oldStartVnode = oldCh[++oldStartIdx]
               newStartVnode = newCh[++newStartIdx]
+          } else if (checkSameNode(oldEndVnode, newEndVnode)) {
+              console.log('命中新后与旧后')
+              patchVnode(oldEndVnode, newEndVnode)
+              oldEndVnode = oldCh[--oldEndIdx]
+              newEndVnode = newCh[--newEndIdx]
+          } else if (checkSameNode(oldStartVnode, newEndVnode)) {
+              console.log('命中新后与旧前')
+              patchVnode( oldStartVnode, newEndVnode)
+            //   意思原本的第一个旧节点被移动了？
+              parentElm.insertBefore( oldStartVnode.elm, oldEndVnode.elm.nextSibling)
+              oldStartVnode = oldCh[++oldStartIdx]
+              newEndVnode = newCh[--newEndIdx]              
+          } else if (checkSameNode(oldEndVnode, newStartVnode)) {
+              console.log('命中新前与旧后')
+              patchVnode( oldEndVnode, newStartVnode)
+            //   意思原本的第一个旧节点被移动了？
+              parentElm.insertBefore( oldEndVnode.elm, oldStartVnode.elm)
+              oldEndVnode = oldCh[--oldEndIdx]
+              newStartVnode = newCh[++newStartIdx]
+          } else {
+              console.log('死循环')
+            //   return
           }
       }
   }
-
+ 
   const patchVnode = (oldNode, newNode) => {
         if (oldNode === newNode) return
         // 新节点存在text属性，即：没有children。
         if (newNode.text !== '' && (newNode.children === undefined || newNode.children.length === 0)) {
             if (oldNode.text !== newNode.text) {
-                console.log('jinlaile')
+                console.log('====================')
                 oldNode.elm.innerText = newNode.text
                 newNode.elm = oldNode.elm
+                console.log('oldNode：', oldNode)
+                console.log('newNode：', newNode)
+                console.log('====================')
             }
         } else {
             // 新节点没有text，有children
@@ -101,15 +126,15 @@ import {
                 newNode.elm = oldNode.elm
                 oldNode.elm.innerText = ''
                 for (const item of newNode.children) {
-                  oldNode.elm.appendChild(createElement(item))                  
+                  oldNode.elm.appendChild(createElement(item))                 
                 }
                 // for (const item of newNode.children) {
                 //     oldNode.elm.appendChild(createElement(item))
                 // }
             }
-        }      
+        }     
   }
-
-
-
+ 
+ 
+ 
   export {myH, myVnode, createElement, patchVnode }
