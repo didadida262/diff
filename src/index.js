@@ -34,16 +34,19 @@ import {
   }
  
   // const newNode1 = myH('ul', {}, 'oldnode')
-  const newNode1 = myH('ul', {},
+  const newNode2 = myH('ul', {},
     [ myH('li', { key: 'a' }, 'a'),
       myH('li', { key: 'b' }, 'b'),
       myH('li', { key: 'c' }, 'c')] )
  
   // const newNode2 = myH('div', {}, 'newnode')
-  const newNode2 = myH('ul', {},
-    [ myH('li', { key: 'c' }, 'c'),
+  const newNode1 = myH('ul', {},
+    [ myH('li', { key: 'a' }, 'a'),
       myH('li', { key: 'b' }, 'bfsdasd'),
-      myH('li', { key: 'a' }, 'a')])
+      myH('li', { key: 'c' }, 'c'),
+      myH('li', { key: 'd' }, 'd'),
+      myH('li', { key: 'e' }, 'e'),
+    ])
  
   myPatch(container, newNode1)
  

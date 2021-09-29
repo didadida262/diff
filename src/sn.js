@@ -94,9 +94,25 @@ import {
               parentElm.insertBefore( oldEndVnode.elm, oldStartVnode.elm)
               oldEndVnode = oldCh[--oldEndIdx]
               newStartVnode = newCh[++newStartIdx]
-          } else {
-              console.log('死循环')
-            //   return
+          }
+      }
+      console.log('-------------------')
+      console.log('parentElm:', parentElm)
+      console.log('oldStartIdx:', oldStartIdx)
+      console.log('oldEndIdx:', oldEndIdx)
+      console.log('newStartIdx:', newStartIdx)
+      console.log('newEndIdx:', newEndIdx)
+      console.log('-------------------')
+
+      if (newStartIdx <= newEndIdx) {
+          const before = newCh[newEndIdx + 1] === null? null: newCh[newEndIdx + 1].elm
+          for (let i = newStartIdx; i <= newEndIdx; i++) {
+              parentElm.insertBefore(createElement(newCh[i]), before)
+          }
+      }
+      if (oldStartIdx <= oldEndIdx) {
+          for (let i = oldStartIdx; i <= oldEndIdx; i++) {
+              parentElm.removeChild(oldCh[i].elm)
           }
       }
   }
@@ -106,12 +122,8 @@ import {
         // 新节点存在text属性，即：没有children。
         if (newNode.text !== '' && (newNode.children === undefined || newNode.children.length === 0)) {
             if (oldNode.text !== newNode.text) {
-                console.log('====================')
                 oldNode.elm.innerText = newNode.text
                 newNode.elm = oldNode.elm
-                console.log('oldNode：', oldNode)
-                console.log('newNode：', newNode)
-                console.log('====================')
             }
         } else {
             // 新节点没有text，有children
