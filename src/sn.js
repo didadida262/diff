@@ -94,6 +94,8 @@ import {
               parentElm.insertBefore( oldEndVnode.elm, oldStartVnode.elm)
               oldEndVnode = oldCh[--oldEndIdx]
               newStartVnode = newCh[++newStartIdx]
+          } else {
+            //   四种都未命中
           }
       }
       console.log('-------------------')

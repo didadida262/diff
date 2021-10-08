@@ -11,8 +11,6 @@ import {
    
   const container = document.getElementById("container")
   const btn = document.getElementById("btn")
-   
- 
   const myPatch = (oldNode, newNode) => {
     console.log('oldNode:', oldNode)
     console.log('newNode:', newNode)
