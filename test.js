@@ -1,7 +1,9 @@
-import { change } from './test2'
-const obj = {
-    name: 'hhvcg'
+const debounce = function () {
+    let timer = null
+    return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+            console.log('click')
+        }, 1000);
+    }
 }
-
-chnage(obj)
-console.log('obj:', obj)

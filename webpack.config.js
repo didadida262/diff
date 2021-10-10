@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   entry: './src/definPro.js',
-  mode: 'development',
+  // mode: 'development',
   output: {
     //   打包生城虚拟文件，没有物理生城
     publicPath: 'xuni',
