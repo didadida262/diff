@@ -26,7 +26,11 @@ module.exports = {
       {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
-      }      
+      },
+      {
+        test: /\.(gif|png|svg|jp?g)$/,
+        use: ['file-loader']
+      }   
     ]
   },
   devServer: {
