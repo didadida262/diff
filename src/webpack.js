@@ -1,5 +1,6 @@
-import { sum } from './webpackUtils.js'
 
-import './webpacCss.js'
 
-console.log(sum(2,3))
+const x = '前端'
+const f = () => {
+    console.log('11111')
+}

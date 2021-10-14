@@ -1,5 +1,11 @@
 .title {
     transition: all .5s;
     user-select: none;
+    background-image: url('../vue3.jpg');
+}
 
+.title2 {
+    transition: all .5s;
+    user-select: none;
+    background-image: url('../浪客剑心.jpg');
 }

@@ -13,9 +13,13 @@
     "snabbdom": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.15.8",
     "autoprefixer": "^10.3.7",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.4.0",
     "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
     "import-loader": "^1.0.1",
     "less": "^4.1.2",
     "less-loader": "^10.0.1",
@@ -23,6 +27,7 @@
     "postcss-loader": "^6.1.1",
     "postcss-preset-env": "^6.7.0",
     "style-loader": "^3.3.0",
+    "url-loader": "^4.1.1",
     "webpack": "^5.53.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2"
