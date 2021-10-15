@@ -1,9 +1,13 @@
-const debounce = function () {
-    let timer = null
+const f = function () {
+    let i = 1
     return function () {
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-            console.log('click')
-        }, 1000);
+        i++
+        console.log(i)
     }
 }
+
+const test = f()
+test()
+test()
+test()
+test()
