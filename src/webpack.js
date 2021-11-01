@@ -1,6 +1,11 @@
 
 
-const x = '前端'
-const f = () => {
-    console.log('11111')
-}
+const p = new Promise((resolve, reject) => {
+    resolve('lalal')
+})
+
+console.log('asdasdasdasd')
+console.log('asdasdasdasd')
+console.log('asdasdasdasd')
+console.log('asdasdasdasd')
+console.log('asdasdasdasd')
