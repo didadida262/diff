@@ -6,6 +6,9 @@ const { DefinePlugin } = require('webpack')
 module.exports = {
   entry: './src/webpack.js',
   mode: 'development',
+  resolve: {
+    extensions: ['.js', '.json']
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
