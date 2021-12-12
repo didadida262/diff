@@ -7,10 +7,9 @@ module.exports = {
   entry: './src/webpack.js',
   mode: 'development',
   output: {
-    //   打包生城虚拟文件，没有物理生城
-    // publicPath: 'xuni',
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
+    publicPath: '/lg'
   },
   // 设置各种loader
   module: {
@@ -59,11 +58,13 @@ module.exports = {
     new DefinePlugin({
       BASE_URL: '"./"'
     })
-  ]
-  // devServer: {
-  //     port: 8080,
-  //     contentBase: 'www',
-  //     // 不压缩
-  //     compress: false
-  // }
+  ],
+  devServer: {
+      port: 8083,
+      contentBase: path.resolve(__dirname, 'public'),
+      watchContentBase: true,
+      publicPath: '/lg',
+      // 不压缩
+      compress: false
+  }
 };
