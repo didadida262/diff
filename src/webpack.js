@@ -1,7 +1,2 @@
 
-
-const p = new Promise((resolve, reject) => {
-    resolve('lalal')
-})
-
-console.log('.......->')
+console.log('--->')

@@ -6,13 +6,19 @@ const { DefinePlugin } = require('webpack')
 module.exports = {
   entry: './src/webpack.js',
   mode: 'development',
-  resolve: {
-    extensions: ['.js', '.json']
-  },
+  // devtool: 'source-map',
+  // resolve: {
+  //   extensions: ['.js', '.json'],
+  //   alias: [
+  //     {
+  //       '@': path.resolve(__dirname, 'src')
+  //     }
+  //   ]
+  // },
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: 'main.js',
-    publicPath: '/lg'
+    publicPath: ''
   },
   // 设置各种loader
   module: {
@@ -65,8 +71,8 @@ module.exports = {
   devServer: {
       port: 8083,
       contentBase: path.resolve(__dirname, 'public'),
-      watchContentBase: true,
-      publicPath: '/lg',
+      // watchContentBase: true,
+      publicPath: '',
       // 不压缩
       compress: false
   }
